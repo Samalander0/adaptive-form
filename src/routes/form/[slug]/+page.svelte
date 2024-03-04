@@ -150,7 +150,7 @@
         </h2>
       {/if}
     </aside>
-    <div class="question">
+    <div class="question" data-type={element.type}>
       <h1>
         {element.title}
       </h1>

@@ -70,4 +70,8 @@ aside {
     margin-left: 0.25em;
     color: #737373;
   }
+
+  &:not([data-type="question"]) {
+    padding-left: 41.34px;
+  }
 }
