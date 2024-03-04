@@ -10,7 +10,7 @@
   let elements = [] // Stores all of the elements (pages & questions) connected to the form
   let element = {} // Stores the current element being displayed
   let layer = 0
-  let question = 1
+  let question = 0
 
   let loading = false
 
