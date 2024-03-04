@@ -10,13 +10,14 @@
 
 main {
   display: flex;
+  position: relative;
 }
 
 aside {
   h2 {
     position: absolute;
-    top: 0.75rem;
-    left: -4rem;
+    top: -0.5rem;
+    left: -3.25rem;
     color: #737373;
   }
 }
