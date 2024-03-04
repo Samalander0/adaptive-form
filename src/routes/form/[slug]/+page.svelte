@@ -105,6 +105,10 @@
     layer++
     element = elements.find(new_element => new_element.layer == layer && new_element.starting);
 
+    if (element.type == "question") { // If new element is a question, increase the question number by one
+      question++
+    }
+
     if (!element) {
       element = elements.find(new_element => new_element.type == "end");
     }

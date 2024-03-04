@@ -5,6 +5,7 @@
   justify-content: flex-start;
   align-items: center;
   padding: 15vw;
+  position: relative;
 }
 
 main {
@@ -13,7 +14,9 @@ main {
 
 aside {
   h2 {
-    margin: 0.75rem 0.75rem 0 0;
+    position: absolute;
+    top: 0.75rem;
+    left: -4rem;
     color: #737373;
   }
 }
@@ -69,9 +72,5 @@ aside {
   .next-prompt {
     margin-left: 0.25em;
     color: #737373;
-  }
-
-  &:not([data-type="question"]) {
-    padding-left: 41.34px;
   }
 }
