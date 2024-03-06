@@ -74,7 +74,6 @@
 
     if (output == "NO") {
       newLayer()
-      question++
       return;
     }
     if (output == "A") {
