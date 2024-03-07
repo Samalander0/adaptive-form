@@ -98,9 +98,9 @@ export async function GET({ url }) {
         question_option_c = url.searchParams.get('question_option_c'),
         question_option_c_when = url.searchParams.get('question_option_c_when'),
         question_option_d = url.searchParams.get('question_option_d'),
-        question_option_d_when = url.searchParams.get('question_option_d_when');
+        question_option_d_when = url.searchParams.get('question_option_d_when'),
         question_option_e = url.searchParams.get('question_option_e'),
-        question_option_e_when = url.searchParams.get('question_option_e_when');
+        question_option_e_when = url.searchParams.get('question_option_e_when'),
         question_option_f = url.searchParams.get('question_option_f'),
         question_option_f_when = url.searchParams.get('question_option_f_when');
   
