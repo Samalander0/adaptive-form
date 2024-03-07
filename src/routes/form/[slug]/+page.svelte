@@ -63,6 +63,14 @@
       const question_option = elements.find(question => question.id == element.options[3]);
       query = query + `&question_option_d=${question_option.title}&question_option_d_when=${question_option.when}`
     }
+    if (element.options[4]) {
+      const question_option = elements.find(question => question.id == element.options[4]);
+      query = query + `&question_option_d=${question_option.title}&question_option_d_when=${question_option.when}`
+    }
+    if (element.options[5]) {
+      const question_option = elements.find(question => question.id == element.options[5]);
+      query = query + `&question_option_d=${question_option.title}&question_option_d_when=${question_option.when}`
+    }
 
     query = encodeURI(query);
 
@@ -87,6 +95,12 @@
     }
     if (output == "D") {
       element = elements.find(question => question.id == element.options[3])
+    }
+    if (output == "E") {
+      element = elements.find(question => question.id == element.options[4])
+    }
+    if (output == "F") {
+      element = elements.find(question => question.id == element.options[5])
     }
 
     answer = "" // Clear Form Field

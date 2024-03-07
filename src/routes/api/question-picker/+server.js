@@ -32,7 +32,7 @@ const generationConfig = {
 };
 
 // Prompt
-function prompt(original_question, question_answer, question_option_a, question_option_a_when, question_option_b, question_option_b_when, question_option_c, question_option_c_when, question_option_d, question_option_d_when) {
+function prompt(original_question, question_answer, question_option_a, question_option_a_when, question_option_b, question_option_b_when, question_option_c, question_option_c_when, question_option_d, question_option_d_when, question_option_e, question_option_e_when, question_option_f, question_option_f_when) {
   let text = `I just asked the interview question "${original_question}", and got the response "${question_answer}". Which question should I ask next?`
 
   if (question_option_a) {
@@ -57,6 +57,20 @@ function prompt(original_question, question_answer, question_option_a, question_
       text = text + ` Question NO: I could also not ask a follow up question. This would be best to do when ${question_option_d_when}. If this is what I should do, respond with NO.`
     } else {
       text = text + ` Question D: "${question_option_d}". Question D would be best to ask when  ${question_option_d_when}`
+    }
+  }
+  if (question_option_e) {
+    if (question_option_e == "NO_QUESTION") {
+      text = text + ` Question NO: I could also not ask a follow up question. This would be best to do when ${question_option_e_when}. If this is what I should do, respond with NO.`
+    } else {
+      text = text + ` Question C: "${question_option_e}". Question C would be best to ask when  ${question_option_e_when}`
+    }
+  }
+  if (question_option_f) {
+    if (question_option_f == "NO_QUESTION") {
+      text = text + ` Question NO: I could also not ask a follow up question. This would be best to do when ${question_option_f_when}. If this is what I should do, respond with NO.`
+    } else {
+      text = text + ` Question D: "${question_option_f}". Question D would be best to ask when  ${question_option_f_when}`
     }
   }
 
@@ -85,12 +99,16 @@ export async function GET({ url }) {
         question_option_c_when = url.searchParams.get('question_option_c_when'),
         question_option_d = url.searchParams.get('question_option_d'),
         question_option_d_when = url.searchParams.get('question_option_d_when');
+        question_option_e = url.searchParams.get('question_option_e'),
+        question_option_e_when = url.searchParams.get('question_option_e_when');
+        question_option_f = url.searchParams.get('question_option_f'),
+        question_option_f_when = url.searchParams.get('question_option_f_when');
   
   if (question_option_a && !question_option_b && !question_option_c) { // If there's only one question option submitted (i.e. A an not B or C), skip the generration and just return A
     return json("A")
   }
         
-  let parts = prompt(original_question, question_answer, question_option_a, question_option_a_when, question_option_b, question_option_b_when, question_option_c, question_option_c_when, question_option_d, question_option_d_when) // Create a prompt using each variable
+  let parts = prompt(original_question, question_answer, question_option_a, question_option_a_when, question_option_b, question_option_b_when, question_option_c, question_option_c_when, question_option_d, question_option_d_when, question_option_e, question_option_e_when, question_option_f, question_option_f_when) // Create a prompt using each variable
   
   const result = await model.generateContent({ // Generate the result
     contents: [{ role: "user", parts }],
