@@ -36,7 +36,11 @@ function prompt(original_question, question_answer, question_option_a, question_
   let text = `I just asked the interview question "${original_question}", and got the response "${question_answer}". Which question should I ask next?`
 
   if (question_option_a) {
-    text = text + ` Question A: "${question_option_a}". Question A would be best to ask when  ${question_option_a_when}`
+    if (question_option_a == "NO_QUESTION") {
+      text = text + ` Question NO: I could also not ask a follow up question. This would be best to do when ${question_option_a_when}. If this is what I should do, respond with NO.`
+    } else {
+      text = text + ` Question A: "${question_option_a}". Question A would be best to ask when  ${question_option_a_when}`
+    }
   }
   if (question_option_b) {
     if (question_option_b == "NO_QUESTION") {
