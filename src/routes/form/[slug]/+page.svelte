@@ -11,6 +11,7 @@
   let element = {} // Stores the current element being displayed
   let layer = 0
   let question = 0
+  let submission_id = crypto.randomUUID() // Generate a submission ID to connect all of the submissions together
 
   let loading = false
 
@@ -37,6 +38,20 @@
   })
 
   async function newElement() { // Called when button is pressed to move to the next element
+    if (element.type == "question") {
+      try {
+        let submitData = {
+          submission_id,
+          form: form.id,
+          question: element.id,
+          text: answer
+        }
+        const submission = await pb.collection("submissions").create(submitData)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
     console.log(element.options)
     if (element.options.length == 0 || element.type !== "question") { // If the current element has no follow up questions, or isn't a question, move on to a new layer
       newLayer()
