@@ -163,7 +163,7 @@
 
   // Handle submission
   let submitted = false
-  function submit() {
+  async function submit() {
     loading = true
 
     let submitted_IDs
