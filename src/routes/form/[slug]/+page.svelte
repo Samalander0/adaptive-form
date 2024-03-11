@@ -11,7 +11,8 @@
   let element = {} // Stores the current element being displayed
   let layer = 0
   let question = 0
-  let submission_id = crypto.randomUUID() // Generate a submission ID to connect all of the submissions together
+  let submission_id = crypto.randomUUID().substr(0,13) // Generate a submission ID to connect all of the submissions together
+  let submissions = [] // Array to store submissions
 
   let loading = false
 
@@ -47,6 +48,7 @@
           text: answer
         }
         const submission = await pb.collection("submissions").create(submitData)
+        submissions.push(submission)
       } catch (err) {
         console.log(err)
       }
@@ -164,6 +166,22 @@
   function submit() {
     loading = true
 
+    let submitted_IDs
+    submissions.map((item) => {
+      submitted_IDs.push(item.id)
+    })
+
+    try {
+      let submitData = {
+        form: form.id,
+        raw: submissions,
+        submissions: submitted_IDs
+      }
+      const submission = await pb.collection("full_submissions").create(submitData)
+    } catch (err) {
+      console.log(err)
+    }
+
     setTimeout(() => {submitted = true}, 2000)
   }
 </script>
@@ -197,7 +215,7 @@
       {/if}
       
       {#if submitted}
-        <small style="color: #737373;">Thanks for submitting! This form is in demo mode, so responses will not save.</small>
+        <small style="color: #737373;">Thanks for submitting! Your responses have been saved as {submission_id}</small>
       {:else}
         <div>
           <button on:click={newElement} disabled={loading}>
