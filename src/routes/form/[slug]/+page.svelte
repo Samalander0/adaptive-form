@@ -166,10 +166,11 @@
   async function submit() {
     loading = true
 
-    let submitted_IDs
+    let submitted_IDs = []
     submissions.map((item) => {
       submitted_IDs.push(item.id)
     })
+    console.log(submitted_IDs)
 
     try {
       let submitData = {
