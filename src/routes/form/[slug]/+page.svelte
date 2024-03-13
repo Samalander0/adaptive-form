@@ -45,6 +45,7 @@
           submission_id,
           form: form.id,
           question: element.id,
+          question_text: element.title,
           text: answer
         }
         const submission = await pb.collection("submissions").create(submitData)
@@ -166,9 +167,14 @@
   async function submit() {
     loading = true
 
-    let submitted_IDs = []
+    let submitted_IDs = [],
+        readable = "",
+        csv = "";
     submissions.map((item) => {
       submitted_IDs.push(item.id)
+
+      readable += `<strong>${item.question_text}</strong><br/>${item.text}<br/><br/>`
+      csv += `"${item.question_text}", "${item.text}"\n`
     })
     console.log(submitted_IDs)
 
@@ -176,14 +182,16 @@
       let submitData = {
         form: form.id,
         raw: submissions,
-        submissions: submitted_IDs
+        submissions: submitted_IDs,
+        readable,
+        csv
       }
       const submission = await pb.collection("full_submissions").create(submitData)
+
+      setTimeout(() => {submitted = true}, 1000)
     } catch (err) {
       console.log(err)
     }
-
-    setTimeout(() => {submitted = true}, 2000)
   }
 </script>
 
@@ -203,7 +211,11 @@
     </aside>
     <div class="question" data-type={element.type}>
       <h1>
-        {element.title}
+        {#if element.title}
+          {element.title}
+        {:else}
+          Loading...
+        {/if}
       </h1>
       {#if element.description}
         <p>
